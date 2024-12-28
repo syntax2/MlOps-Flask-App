@@ -12,11 +12,24 @@ def welcome():
 def index():
     return render_template('index.html')
 
-@app.route('/form', methods=['GET','POST'])
+
+@app.route('/form', methods=['GET', 'POST'])
 def form():
-    if request.method=='POST':
-        pass
+    result = None
+    if request.method == 'POST':
+        # Get form data
+        input_text = request.form.get('input_text')
+        numeric_param = request.form.get('numeric_param')
+        
+        # Process the input (you can add your ML model processing here)
+        result = f"Received text: {input_text}, numeric parameter: {numeric_param}"
+        
+        # Pass the result back to the template
+        return render_template('form.html', result=result)
+    
+    # If it's a GET request, just show the empty form
     return render_template('form.html')
+
 
 # This should always come last - it starts your server
 if __name__=="__main__":
