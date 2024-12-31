@@ -12,6 +12,15 @@ def welcome():
 def index():
     return render_template('index.html')
 
+#variable rule
+@app.route('/success/<int:score>')
+def success(score):
+    res = ""
+    if score>=50:
+        res="pass"
+    else:
+        res="FAIL"
+    return render_template('result.html',results=res)
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
